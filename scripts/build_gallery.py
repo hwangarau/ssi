@@ -31,7 +31,8 @@ def main():
       <figure class="card">
         <a href="{img}"><img loading="lazy" src="{img}" alt="p={d['p']} l={d['l']}"></a>
         <figcaption>
-          <span class="pl">p = {d['p']} &nbsp; &#8467; = {d['l']}</span>
+          <span class="pl">p = {d['p']} &nbsp; &#8467; = {d['l']}
+            <em class="type">{d.get('spineType','')}</em></span>
           <span class="stat">V={d['n']} &middot; spine={nsp} &middot; maxDist={d['maxDist']}</span>
           <span class="hist">{html.escape(hist_str)}</span>
         </figcaption>
@@ -64,6 +65,8 @@ def main():
   .card img {{ width:100%; display:block; background:#0d1117; }}
   figcaption {{ padding:.6rem .8rem; display:flex; flex-direction:column; gap:.15rem; }}
   .pl {{ font-weight:600; }}
+  .type {{ float:right; font-style:normal; font-size:.72rem; color:#0d1117;
+          background:#58a6ff; border-radius:4px; padding:.05rem .4rem; }}
   .stat {{ color:#8b949e; font-size:.85rem; }}
   .hist {{ color:#6e7681; font-size:.78rem; font-family:ui-monospace,monospace; }}
   footer {{ max-width:1100px; margin:0 auto 3rem; padding:0 1.5rem; color:#6e7681;

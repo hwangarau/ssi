@@ -29,6 +29,61 @@ def load_nodes(nodes_path):
     return lines
 
 
+def classify_spine(spine_idx, edges):
+    """Classify the induced spine subgraph into one of three layout cases.
+
+    Returns (spine_type, spine_order) where spine_order lists the spine vertex
+    indices in the order they should be drawn:
+      "ring"    -> no edges among spine vertices: place evenly on a circle.
+      "line"    -> spine vertices form a single path: stack them down the centre,
+                   spine_order following the path from one endpoint to the other.
+      "generic" -> anything else (cycles, branching, mixed): generic circular layout.
+    """
+    sset = set(spine_idx)
+    adj = {i: set() for i in spine_idx}
+    for a, b in edges:
+        if a in sset and b in sset:
+            adj[a].add(b)
+            adj[b].add(a)
+    S = len(spine_idx)
+    Es = sum(len(v) for v in adj.values()) // 2
+    deg = {i: len(adj[i]) for i in spine_idx}
+    maxdeg = max(deg.values()) if deg else 0
+
+    if S <= 1:
+        return "line", list(spine_idx)
+    if Es == 0:
+        return "ring", list(spine_idx)
+
+    # connected over all spine vertices?
+    start = spine_idx[0]
+    seen = {start}
+    stack = [start]
+    while stack:
+        x = stack.pop()
+        for y in adj[x]:
+            if y not in seen:
+                seen.add(y)
+                stack.append(y)
+    connected = len(seen) == S
+
+    if connected and Es == S - 1 and maxdeg <= 2:
+        # a single path: order it from an endpoint (degree 1)
+        ends = [i for i in spine_idx if deg[i] == 1]
+        cur = ends[0] if ends else spine_idx[0]
+        prev, order = None, [cur]
+        while len(order) < S:
+            nxt = [y for y in adj[cur] if y != prev]
+            if not nxt:
+                break
+            prev, cur = cur, nxt[0]
+            order.append(cur)
+        if len(order) == S:
+            return "line", order
+
+    return "generic", list(spine_idx)
+
+
 def process(npz_path, out_dir):
     m = re.search(r"(\d+)[/\\](\d+)_(\d+)\.npz$", npz_path.replace("\\", "/"))
     if not m:
@@ -81,12 +136,16 @@ def process(npz_path, out_dir):
     for d in dist_out.tolist():
         hist[d] = hist.get(d, 0) + 1
 
+    spine_type, spine_order = classify_spine(spine_idx.tolist(), edges)
+
     out = {
         "p": p, "l": l, "n": int(n),
         "spine": spine_mask.tolist(),
         "dist": dist_out.tolist(),
         "maxDist": int(dist_out.max()) if n else 0,
         "edges": edges,
+        "spineType": spine_type,
+        "spineOrder": spine_order,
         "j": j_lines,
     }
     os.makedirs(out_dir, exist_ok=True)
@@ -97,7 +156,7 @@ def process(npz_path, out_dir):
     nsp = int(spine_mask.sum())
     hist_str = " ".join(f"d{d}:{hist[d]}" for d in sorted(hist))
     print(f"p={p:>5} l={l:>2}: V={n:<5} spine={nsp:<5} maxDist={out['maxDist']:<3} "
-          f"edges={len(edges):<6} [{hist_str}]")
+          f"edges={len(edges):<6} spine={spine_type:<7} [{hist_str}]")
     return out_path
 
 

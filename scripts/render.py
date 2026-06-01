@@ -50,7 +50,8 @@ def render(json_path, out_dir):
     ax.set_aspect("equal")
     ax.axis("off")
     nsp = int(spine.sum())
-    ax.set_title(f"p = {p}   ℓ = {l}    V = {n}   spine = {nsp}",
+    stype = d.get("spineType", "")
+    ax.set_title(f"p = {p}   ℓ = {l}    V = {n}   spine = {nsp} ({stype})",
                  color="#e6edf3", fontsize=13, pad=12)
     fig.tight_layout()
 
