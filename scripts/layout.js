@@ -127,7 +127,7 @@ function layoutFile(file) {
   const out = new Array(n);
   for (let i = 0; i < n; i++) {
     const p = layout.getNodePosition(i);
-    out[i] = [p.x, p.y];
+    out[i] = [Math.round(p.x * 10) / 10, Math.round(p.y * 10) / 10];
     if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
     if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
   }

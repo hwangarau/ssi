@@ -137,6 +137,7 @@ def process(npz_path, out_dir):
         hist[d] = hist.get(d, 0) + 1
 
     spine_type, spine_order = classify_spine(spine_idx.tolist(), edges)
+    hist_pairs = [[d, hist[d]] for d in sorted(hist)]
 
     out = {
         "p": p, "l": l, "n": int(n),
@@ -146,7 +147,7 @@ def process(npz_path, out_dir):
         "edges": edges,
         "spineType": spine_type,
         "spineOrder": spine_order,
-        "j": j_lines,
+        "hist": hist_pairs,
     }
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"{p}_{l}.json")

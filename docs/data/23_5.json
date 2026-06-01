@@ -1,1 +1,1 @@
-{"p":23,"l":5,"n":3,"spine":[true,true,true],"dist":[0,0,0],"maxDist":0,"edges":[[0,2],[1,2]],"spineType":"line","spineOrder":[0,2,1],"j":["0","3","19"],"pos":[[0,-52],[0,52],[0,0]],"bbox":[0,-52,0,52]}
+{"p":23,"l":5,"n":3,"spine":[true,true,true],"dist":[0,0,0],"maxDist":0,"edges":[[0,2],[1,2]],"spineType":"line","spineOrder":[0,2,1],"hist":[[0,3]],"pos":[[0,-52],[0,52],[0,0]],"bbox":[0,-52,0,52]}
