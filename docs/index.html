@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supersingular Isogeny Graphs</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; background:#0d1117; color:#e6edf3;
+         font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  header { padding:2rem 1.5rem 1rem; max-width:1100px; margin:0 auto; }
+  h1 { margin:0 0 .3rem; font-size:1.6rem; }
+  p.sub { margin:.2rem 0; color:#8b949e; line-height:1.5; }
+  a { color:#58a6ff; }
+  .legend { display:flex; gap:1.2rem; margin:.8rem 0; flex-wrap:wrap; font-size:.9rem; }
+  .legend span::before { content:""; display:inline-block; width:.7rem; height:.7rem;
+         border-radius:50%; margin-right:.4rem; vertical-align:middle; }
+  .spine::before { background:#ff3b30; }
+  .nonspine::before { background:#21918c; }
+  .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+          max-width:1100px; margin:1rem auto 4rem; padding:0 1.5rem; }
+  .card { margin:0; background:#161b22; border:1px solid #30363d; border-radius:10px;
+          overflow:hidden; }
+  .card img { width:100%; display:block; background:#0d1117; }
+  figcaption { padding:.6rem .8rem; display:flex; flex-direction:column; gap:.15rem; }
+  .pl { font-weight:600; }
+  .stat { color:#8b949e; font-size:.85rem; }
+  .hist { color:#6e7681; font-size:.78rem; font-family:ui-monospace,monospace; }
+  footer { max-width:1100px; margin:0 auto 3rem; padding:0 1.5rem; color:#6e7681;
+           font-size:.82rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Supersingular Isogeny Graphs</h1>
+  <p class="sub">Force-directed layouts (anvaka's
+    <a href="https://github.com/anvaka/ngraph.forcelayout">ngraph.forcelayout</a>)
+    of supersingular &#8467;-isogeny graphs over &#120125;<sub>p&sup2;</sub>.
+    Data: the <a href="https://zenodo.org/records/4304044">Isogeny Database</a>
+    (Florit &amp; Finol, ODC-BY).</p>
+  <p class="sub">The <b>spine</b> is the set of vertices whose j-invariant lies in
+    &#120125;<sub>p</sub>; other vertices are shaded by graph distance to the
+    nearest spine vertex.</p>
+  <div class="legend">
+    <span class="spine">spine (j &isin; &#120125;<sub>p</sub>)</span>
+    <span class="nonspine">non-spine (shaded by distance to spine)</span>
+  </div>
+  <p class="sub">8 graphs &middot; primes: 23, 47, 83, 97</p>
+</header>
+<main class="grid">
+      <figure class="card">
+        <a href="img/23_2.png"><img loading="lazy" src="img/23_2.png" alt="p=23 l=2"></a>
+        <figcaption>
+          <span class="pl">p = 23 &nbsp; &#8467; = 2</span>
+          <span class="stat">V=3 &middot; spine=3 &middot; maxDist=0</span>
+          <span class="hist">d0:3</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/23_3.png"><img loading="lazy" src="img/23_3.png" alt="p=23 l=3"></a>
+        <figcaption>
+          <span class="pl">p = 23 &nbsp; &#8467; = 3</span>
+          <span class="stat">V=3 &middot; spine=3 &middot; maxDist=0</span>
+          <span class="hist">d0:3</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/47_2.png"><img loading="lazy" src="img/47_2.png" alt="p=47 l=2"></a>
+        <figcaption>
+          <span class="pl">p = 47 &nbsp; &#8467; = 2</span>
+          <span class="stat">V=5 &middot; spine=5 &middot; maxDist=0</span>
+          <span class="hist">d0:5</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/47_5.png"><img loading="lazy" src="img/47_5.png" alt="p=47 l=5"></a>
+        <figcaption>
+          <span class="pl">p = 47 &nbsp; &#8467; = 5</span>
+          <span class="stat">V=5 &middot; spine=5 &middot; maxDist=0</span>
+          <span class="hist">d0:5</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/83_2.png"><img loading="lazy" src="img/83_2.png" alt="p=83 l=2"></a>
+        <figcaption>
+          <span class="pl">p = 83 &nbsp; &#8467; = 2</span>
+          <span class="stat">V=8 &middot; spine=6 &middot; maxDist=1</span>
+          <span class="hist">d0:6, d1:2</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/83_3.png"><img loading="lazy" src="img/83_3.png" alt="p=83 l=3"></a>
+        <figcaption>
+          <span class="pl">p = 83 &nbsp; &#8467; = 3</span>
+          <span class="stat">V=8 &middot; spine=6 &middot; maxDist=1</span>
+          <span class="hist">d0:6, d1:2</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/97_2.png"><img loading="lazy" src="img/97_2.png" alt="p=97 l=2"></a>
+        <figcaption>
+          <span class="pl">p = 97 &nbsp; &#8467; = 2</span>
+          <span class="stat">V=8 &middot; spine=2 &middot; maxDist=3</span>
+          <span class="hist">d0:2, d1:2, d2:2, d3:2</span>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <a href="img/97_5.png"><img loading="lazy" src="img/97_5.png" alt="p=97 l=5"></a>
+        <figcaption>
+          <span class="pl">p = 97 &nbsp; &#8467; = 5</span>
+          <span class="stat">V=8 &middot; spine=2 &middot; maxDist=1</span>
+          <span class="hist">d0:2, d1:6</span>
+        </figcaption>
+      </figure>
+</main>
+<footer>
+  Built with a Python (numpy/scipy) &rarr; anvaka ngraph.forcelayout &rarr; matplotlib
+  pipeline. Source in <code>/scripts</code>.
+</footer>
+</body>
+</html>
